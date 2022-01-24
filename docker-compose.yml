@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto:1.6
+    networks:
+      - internal-net
+    ports:
+      - 1883:1883
+      - 8883:8883
+    volumes:
+      - ./mosquitto/conf:/mosquitto/conf
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+
+  module3:
+    build: ./module3
+    networks:
+      - internal-net
+    depends_on:
+      - mosquitto
+  
+  module2:
+    build: ./module2
+    networks:
+      - internal-net
+    depends_on:
+      - module3
+
+  module1:
+    build: ./module1
+    networks:
+      - internal-net
+    depends_on:
+      - module2
+
+networks:
+  internal-net:
+    name: "internal-net"
