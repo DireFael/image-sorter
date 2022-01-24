@@ -7,7 +7,7 @@ Simple color-based image sorter. It consists of 3 modules. The first module load
 In first to download project
 
 ```
-git clone {{link}} 
+git clone https://github.com/DireFael/image-sorter.git
 ```
 
 In folder ``image-sorter`` run:
